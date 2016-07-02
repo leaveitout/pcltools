@@ -3,7 +3,7 @@
 //
 
 
-#include "segmentation.hpp"
+#include "pcltools/segmentation.hpp"
 
 namespace pcltools {
 
