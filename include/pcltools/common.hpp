@@ -11,6 +11,7 @@
 
 namespace pcltools {
 
+namespace literals {
 // User defined literals
 // @formatter:off
 constexpr size_t operator "" _sz (unsigned long long size) { return size_t{size}; }
@@ -21,6 +22,7 @@ constexpr double operator "" _cm (unsigned long long cm) { return cm / 100.0; }
 constexpr double operator "" _mm (long double mm) { return mm / 1000.0; }
 constexpr double operator "" _mm (unsigned long long mm) { return mm / 1000.0; }
 // @formatter:on
+}
 
 template <typename T>
 constexpr auto izrange (T upper)

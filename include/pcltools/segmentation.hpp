@@ -17,6 +17,9 @@
 #include "common.hpp"
 
 
+using namespace pcltools::literals;
+
+
 namespace pcltools {
 
 namespace seg {
