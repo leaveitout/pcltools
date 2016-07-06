@@ -5,9 +5,9 @@
 #include "pcltools/fileio.hpp"
 
 
-auto pcltools::fileio::getPcdFilesInPath (fs::path const & pcd_dir)
+auto pcltools::fileio::getPcdFilesInPath (fs::path const & pcd_dir, bool sort)
 -> std::deque <fs::path> {
-  auto result_set = std::deque < fs::path > {};
+  auto result_set = std::deque <fs::path> {};
   for (auto const & entry : boost::make_iterator_range (fs::directory_iterator{pcd_dir})) {
     if (fs::is_regular_file (entry.status ())) {
       if (entry.path ().extension () == ".pcd") {
@@ -15,6 +15,8 @@ auto pcltools::fileio::getPcdFilesInPath (fs::path const & pcd_dir)
       }
     }
   }
+  if (sort)
+    std::sort (std::begin (result_set), std::end (result_set));
   return result_set;
 }
 
