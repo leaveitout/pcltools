@@ -5,7 +5,7 @@
 #ifndef PCL_OBJECT_DETECT_LINEMOD_FILEIO_HPP
 #define PCL_OBJECT_DETECT_LINEMOD_FILEIO_HPP
 
-#include <deque>
+#include <forward_list>
 #include <boost/filesystem.hpp>
 #include <boost/range/iterator_range.hpp>
 
@@ -19,9 +19,9 @@ namespace fileio {
  * Gets all files ending in .pcd in a folder.
  * @param pcd_dir The directory in which the .pcd files are located.
  * @param sort Sort the files according to their path (default is true).
- * @return A std::deque container of the paths.
+ * @return A std::forward_list container of the paths.
  */
-auto getPcdFilesInPath (fs::path const & pcd_dir, bool sort = true) -> std::deque <fs::path>;
+auto getPcdFilesInPath (fs::path const & pcd_dir, bool sort = true) -> std::forward_list <fs::path>;
 
 
 /**
