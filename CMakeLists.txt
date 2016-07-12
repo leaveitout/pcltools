@@ -14,7 +14,7 @@ add_definitions(${PCL_DEFINITIONS})
 set(PCLTOOLS_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(${PCLTOOLS_INCLUDE_DIR})
 
-set(SOURCE_FILES src/pcltools/fileio.cpp src/pcltools/segmentation.cpp)
+set(SOURCE_FILES src/pcltools/fileio.cpp src/pcltools/segmentation.cpp include/pcltools/linalg.hpp)
 
 add_library(pcltools SHARED ${SOURCE_FILES})
 
