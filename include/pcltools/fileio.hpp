@@ -29,21 +29,21 @@ auto getPcdFilesInPath (fs::path const & pcd_dir, bool sort = true) -> std::forw
  * @param filepath The filepath to be checked.
  * @return True if filepath both exists and is a file, false otherwise.
  */
-auto checkValidFile (fs::path const & filepath) -> bool;
+auto checkValidFile (fs::path const & filepath) noexcept -> bool;
 
 /**
  * Checks whether the directory path exists and whether it is a directory.
  * @param dirpath The directory  path to be checked.
  * @return True if dirpath both exists and is a directory, false otherwise.
  */
-auto checkValidDir (fs::path const & dirpath) -> bool;
+auto checkValidDir (fs::path const & dirpath) noexcept -> bool;
 
 /**
  * Replaces tilde char in a string with the value of the $HOME environment variable.
  * @param path_string A string that may contain a tilde ('~') char.
  * @return A new string with the tilde replaced with the value of the $HOME environment variable.
  */
-auto expandTilde (std::string path_string) -> fs::path;
+auto expandTilde (std::string path_string) noexcept -> fs::path;
 
 }
 }
