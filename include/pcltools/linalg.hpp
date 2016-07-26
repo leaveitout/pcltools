@@ -41,7 +41,7 @@ auto getQuaternionAndTranslation (Eigen::Matrix <Scalar, 4, 4> const & transform
  */
 template <typename Scalar>
 auto getTransformationMatrix (Eigen::Quaternion <Scalar> const & quaternion,
-                              Eigen::Matrix <Scalar, 3, 1> translation)
+                              Eigen::Matrix <Scalar, 3, 1> const & translation)
 -> Eigen::Matrix <Scalar, 4, 4> {
   auto rotation = Eigen::Matrix <Scalar, 3, 3> {quaternion.toRotationMatrix ()};
   auto transformation = Eigen::Matrix <Scalar, 4, 4> {Eigen::Matrix <Scalar, 4, 4>::Identity ()};
