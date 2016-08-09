@@ -14,7 +14,21 @@ add_definitions(${PCL_DEFINITIONS})
 set(PCLTOOLS_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(${PCLTOOLS_INCLUDE_DIR})
 
-set(SOURCE_FILES src/pcltools/fileio.cpp src/pcltools/segmentation.cpp include/pcltools/linalg.hpp)
+set(SOURCE_FILES
+        src/pcltools/fileio.cpp
+        src/pcltools/segmentation.cpp
+        src/pcltools/pipeline/node.cpp
+        include/pcltools/common.hpp
+        include/pcltools/fileio.hpp
+        include/pcltools/linalg.hpp
+        include/pcltools/segmentation.hpp
+        include/pcltools/pipeline/buffer.hpp
+        include/pcltools/pipeline/node.hpp
+        include/pcltools/pipeline/processor.hpp
+        include/pcltools/pipeline/producer.hpp
+        include/pcltools/pipeline/threaded_cloud_viewer.hpp
+        include/pcltools/pipeline/cloud_producer.hpp )
+
 
 add_library(pcltools SHARED ${SOURCE_FILES})
 
