@@ -44,7 +44,6 @@ class Processor: public virtual Node {
 
   auto virtual start ()
   -> void override final {
-    is_stopping_ = false;
     is_started_ = true;
     //    std::stringstream ss;
     //    ss << "Processor " << id_ << ", " << description_ << "";
@@ -129,9 +128,9 @@ class Processor: public virtual Node {
     if (element) {
       // TODO: Should we pass along the boost::optional
       processBufferElement (*element);
-#ifndef NDEBUG
-      BOOST_LOG_TRIVIAL (info) << "Processing, size " << buffer_->getSize ();
-#endif
+//#ifndef NDEBUG
+//      BOOST_LOG_TRIVIAL (info) << "Processing, size " << buffer_->getSize ();
+//#endif
     }
   }
 

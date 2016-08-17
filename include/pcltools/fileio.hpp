@@ -11,9 +11,12 @@
 #include <boost/make_shared.hpp>
 #include <pcl/point_cloud.h>
 #include <pcl/io/pcd_io.h>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/exceptions.hpp>
 
 
 namespace fs = boost::filesystem;
+namespace pt = boost::property_tree;
 
 namespace pcltools {
 namespace fileio {
@@ -124,6 +127,23 @@ auto saveCloud (pcl::PointCloud <PointType> const & cloud, fs::path const & pcd_
     throw std::system_error (ec, ss.str ());
   }
 }
+
+/**
+ * @throws boost::property_tree::ptree_bad_data exception when the value cannot be added.
+ */
+template <typename ValueType>
+auto addValueToList (pt::ptree & tree, ValueType const & value) {
+  auto temp_node = pt::ptree {};
+  try {
+    temp_node.put_value (value);
+  } catch (pt::ptree_bad_data const & ex) {
+    throw ex;
+  }
+  tree.push_back (std::make_pair ("", temp_node));
+}
+
+
+
 }
 }
 
