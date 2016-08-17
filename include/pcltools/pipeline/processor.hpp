@@ -62,7 +62,7 @@ class Processor: public virtual Node {
    * @param process_remaining Process all the elements remaining in buffer before joining thread.
    */
   auto virtual stop (bool process_remaining)
-  -> void final {
+  -> void {
     if (is_started_) {
       {
         std::lock_guard <std::mutex> lock (mutex_);
