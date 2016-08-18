@@ -28,6 +28,7 @@ class ArmPoseStorage {
   constexpr static auto FILENAME_NAME = "file";
   constexpr static auto POINT_1_NAME = "point1";
   constexpr static auto POINT_2_NAME = "point2";
+  constexpr static auto RADIUS_NAME = "radius";
 
  public:
   ArmPoseStorage (fs::path const & pcd_directory);
@@ -40,16 +41,17 @@ class ArmPoseStorage {
 
   auto addPose (fs::path const & file_path,
                 Eigen::Vector3f const & point_1,
-                Eigen::Vector3f const & point_2) -> void;
+                Eigen::Vector3f const & point_2,
+                float radius) -> void;
 
   auto getPoses () const
-  -> std::vector <std::tuple <fs::path, Eigen::Vector3f, Eigen::Vector3f>> const &;
+  -> std::vector <std::tuple <fs::path, Eigen::Vector3f, Eigen::Vector3f, float>> const &;
 
  private:
   fs::path pcd_directory_;
 
   // TODO: Eigen aligned allocator
-  std::vector <std::tuple <fs::path, Eigen::Vector3f, Eigen::Vector3f>> poses_;
+  std::vector <std::tuple <fs::path, Eigen::Vector3f, Eigen::Vector3f, float>> poses_;
   mutable std::mutex poses_mutex_;
 };
 

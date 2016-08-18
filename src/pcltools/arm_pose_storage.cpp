@@ -39,6 +39,8 @@ auto pcltools::fileio::ArmPoseStorage::save (fs::path const & destination_path) 
         addValueToList (point_2_node, point_2 (index));
       pose_node.add_child (POINT_2_NAME, point_2_node);
 
+      pose_node.put (RADIUS_NAME, std::get <float> (pose));
+
       poses_tree.push_back (std::make_pair ("", pose_node));
     }
 
@@ -73,18 +75,20 @@ auto pcltools::fileio::ArmPoseStorage::load (fs::path const & source_path) -> bo
       auto point_2 = Eigen::Vector3f {};
 
       auto index = 0UL;
-      for (pt::ptree::value_type const & point_1_el : pose.second.get_child (POINT_1_NAME)) {
+      for (auto const & point_1_el : pose.second.get_child (POINT_1_NAME)) {
         point_1 (index) = point_1_el.second.get_value <float> ();
         ++index;
       }
 
       index = 0UL;
-      for (pt::ptree::value_type const & point_2_el : pose.second.get_child (POINT_2_NAME)) {
+      for (auto const & point_2_el : pose.second.get_child (POINT_2_NAME)) {
         point_2 (index) = point_2_el.second.get_value <float> ();
         ++index;
       }
 
-      poses_.emplace_back (filename, point_1, point_2);
+      auto radius = pose.second.get <float> (RADIUS_NAME);
+
+      poses_.emplace_back (filename, point_1, point_2, radius);
     }
   }
   catch (pt::json_parser_error const & error) {
@@ -111,10 +115,11 @@ auto pcltools::fileio::ArmPoseStorage::load (fs::path const & source_path) -> bo
 
 
 void pcltools::fileio::ArmPoseStorage::addPose (fs::path const & file_path,
-                               Eigen::Vector3f const & point_1,
-                               Eigen::Vector3f const & point_2) {
+                                                Eigen::Vector3f const & point_1,
+                                                Eigen::Vector3f const & point_2,
+                                                float radius) {
   std::lock_guard <std::mutex> lock {poses_mutex_};
-  poses_.emplace_back (file_path, point_1, point_2);
+  poses_.emplace_back (file_path, point_1, point_2, radius);
 }
 
 
@@ -123,9 +128,8 @@ auto pcltools::fileio::ArmPoseStorage::getPcdDirectory () const noexcept -> fs::
 }
 
 
-auto pcltools::fileio::ArmPoseStorage::getPoses () const -> std::vector <std::tuple <fs::path,
-                                                                    Eigen::Vector3f,
-                                                                    Eigen::Vector3f>> const & {
+auto pcltools::fileio::ArmPoseStorage::getPoses () const
+-> std::vector <std::tuple <fs::path, Eigen::Vector3f, Eigen::Vector3f, float>> const & {
   std::lock_guard <std::mutex> lock {poses_mutex_};
   return poses_;
 }
