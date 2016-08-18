@@ -87,3 +87,68 @@ pcltools::Palette::Palette (unsigned num_colors, unsigned char value, unsigned c
 auto pcltools::Palette::getColorAt (unsigned int index) -> RGBColor {
   return rgb_colors_.at (index);
 }
+
+
+auto ::pcltools::ColorScheme::foreground () -> pcltools::RGBColor {
+  return RGBColor {0xc5, 0xc8, 0xc6};
+}
+
+
+auto ::pcltools::ColorScheme::background () -> pcltools::RGBColor {
+  return RGBColor {0x1d, 0x1f, 0x21};
+}
+
+
+auto ::pcltools::ColorScheme::selection () -> pcltools::RGBColor {
+  return RGBColor {0x37, 0x3b, 0x41};
+}
+
+
+auto ::pcltools::ColorScheme::line () -> pcltools::RGBColor {
+  return RGBColor {0x28, 0x2a, 0x2e};
+}
+
+
+auto ::pcltools::ColorScheme::comment () -> pcltools::RGBColor {
+  return RGBColor {0x96, 0x98, 0x96};
+}
+
+
+auto ::pcltools::ColorScheme::red () -> pcltools::RGBColor {
+  return RGBColor {0xcc, 0x66, 0x66};
+}
+
+
+auto ::pcltools::ColorScheme::orange () -> pcltools::RGBColor {
+  return RGBColor {0xde, 0x93, 0x5f};
+}
+
+
+auto ::pcltools::ColorScheme::yellow () -> pcltools::RGBColor {
+  return RGBColor {0xf0, 0xc6, 0x74};
+}
+
+
+auto ::pcltools::ColorScheme::green () -> pcltools::RGBColor {
+  return RGBColor {0xb5, 0xbd, 0x68};
+}
+
+
+auto ::pcltools::ColorScheme::aqua () -> pcltools::RGBColor {
+  return RGBColor {0x8a, 0xbe, 0xb7};
+}
+
+
+auto ::pcltools::ColorScheme::blue () -> pcltools::RGBColor {
+  return RGBColor {0x81, 0xa2, 0xbe};
+}
+
+
+auto ::pcltools::ColorScheme::purple () -> pcltools::RGBColor {
+  return RGBColor {0xb2, 0x94, 0xbb};
+}
+
+
+auto ::pcltools::ColorScheme::window () -> pcltools::RGBColor {
+  return RGBColor {0x4d, 0x50, 0x57};
+}

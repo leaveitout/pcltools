@@ -12,40 +12,82 @@
 #include <opencv2/core/mat.hpp>
 #include <opencv2/imgproc.hpp>
 
+
 namespace pcltools {
 
 class RGBColor {
  public:
   RGBColor (unsigned char r, unsigned char g, unsigned char b);
 
-  auto getAt(unsigned index) const -> unsigned char;
+  auto getAt (unsigned index) const -> unsigned char;
 
   auto setAt (unsigned index, unsigned char channel_value) -> void;
 
-  auto r() const -> unsigned char;
+  auto r () const -> unsigned char;
 
-  auto g() const -> unsigned char;
+  auto g () const -> unsigned char;
 
-  auto b() const -> unsigned char;
+  auto b () const -> unsigned char;
 
  private:
-  std::array<unsigned char, 3> rgb_;
+  std::array <unsigned char, 3> rgb_;
 };
 
 class Palette {
  private:
 
  public:
-  Palette(unsigned num_colors,
-          unsigned char value = 200,
-          unsigned char saturation = 200);
+  Palette (unsigned num_colors,
+           unsigned char value = 200,
+           unsigned char saturation = 200);
 
   auto getColorAt (unsigned int index) -> RGBColor;
 
  private:
-  std::vector<RGBColor> rgb_colors_;
-
+  std::vector <RGBColor> rgb_colors_;
 };
 
-}
+namespace ColorScheme {
+
+auto foreground () -> RGBColor;
+
+
+auto background () -> RGBColor;
+
+
+auto selection () -> RGBColor;
+
+
+auto line () -> RGBColor;
+
+
+auto comment () -> RGBColor;
+
+
+auto red () -> RGBColor;
+
+
+auto orange () -> RGBColor;
+
+
+auto yellow () -> RGBColor;
+
+
+auto green () -> RGBColor;
+
+
+auto aqua () -> RGBColor;
+
+
+auto blue () -> RGBColor;
+
+
+auto purple () -> RGBColor;
+
+
+auto window () -> RGBColor;
+
+} //COLOR_SCHEME
+
+} //PCLTOOLS
 #endif //PCLTOOLS_PALETTE_HPP
