@@ -75,6 +75,9 @@ auto extractIndices (typename pcl::PointCloud <PointType>::ConstPtr const & clou
                      bool keep_organised = false,
                      bool negative = false)
 -> typename pcl::PointCloud <PointType>::Ptr {
+  if (indices.indices.size () == 0UL)
+    return boost::make_shared <pcl::PointCloud <PointType>> ();
+
   auto extract = pcl::ExtractIndices <PointType>{};
   extract.setInputCloud (cloud);
   auto indices_ptr = boost::make_shared <pcl::PointIndices> (indices);
