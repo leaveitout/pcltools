@@ -6,6 +6,7 @@
 #define PCL_OBJECT_DETECT_LINEMOD_FILEIO_HPP
 
 #include <forward_list>
+#include <queue>
 #include <boost/filesystem.hpp>
 #include <boost/range/iterator_range.hpp>
 #include <boost/make_shared.hpp>
@@ -31,6 +32,25 @@ auto getPcdFilesInPath (fs::path const & pcd_dir, bool sort = true) -> std::forw
 
 
 /**
+ * Gets all files ending in .pcd in a folder.
+ * @param pcd_dir The directory in which the .pcd files are located.
+ * @param sort Sort the files according to their path (default is true).
+ * @return A std::deque container of the paths.
+ */
+auto getPcdFilesInPathDeque (fs::path const & pcd_dir, bool sort = true)
+-> std::deque <fs::path>;
+
+
+/**
+ * Gets all files ending in .pcd in a folder.
+ * @param pcd_dir The directory in which the .pcd files are located.
+ * @return A std::map container of the time and the path of each file.
+ */
+auto getPcdFilesInPathMap (fs::path const & pcd_dir)
+-> std::map <double, fs::path>;
+
+
+/**
  * Checks whether the filepath exists and whether it is a file.
  * @param filepath The filepath to be checked.
  * @return True if filepath both exists and is a file, false otherwise.
@@ -50,6 +70,31 @@ auto checkValidDir (fs::path const & dirpath) noexcept -> bool;
  * @return A new string with the tilde replaced with the value of the $HOME environment variable.
  */
 auto expandTilde (std::string path_string) noexcept -> fs::path;
+
+
+/**
+ * Associate timings from different folders of pcd recordings.
+ *
+ * @param target_set The timing set to target.
+ * @param source_sets A vector of maps that we wish to associate with the target set.
+ * @return Queue of vectors with each pcd associated with a target pcd.
+ */
+auto associateTimings (std::map <double, fs::path> const & target_set,
+                       std::vector <std::map <double, fs::path>> const & source_sets)
+-> std::queue <std::vector <fs::path>>;
+
+
+/**
+ * Associate timings from different folders of pcd recordings.
+ *
+ * @param target_set The timing set to target.
+ * @param source_sets A vector of maps that we wish to associate with the target set.
+ * @return Vector of vectors with each pcd associated with a target pcd.
+ */
+auto associateTimingsVector (std::map <double, fs::path> const & target_set,
+                             std::vector <std::map <double,
+                                                    fs::path>> const & source_sets)
+-> std::vector <std::vector <fs::path>>;
 
 
 /**
@@ -98,7 +143,7 @@ auto loadCloud (fs::path const & pcd_cloud_path)
  */
 template <typename PointType>
 auto saveCloud (pcl::PointCloud <PointType> const & cloud, fs::path const & pcd_cloud_path)
--> void{
+-> void {
   // Check if cloud is empty
   if (cloud.size () == 0) {
     auto ss = std::stringstream {};
@@ -109,7 +154,7 @@ auto saveCloud (pcl::PointCloud <PointType> const & cloud, fs::path const & pcd_
 
   // Check location is valid
   auto canonical_path = fs::absolute (pcd_cloud_path);
-  if (!pcltools::fileio::checkValidDir (canonical_path.parent_path ())){
+  if (!pcltools::fileio::checkValidDir (canonical_path.parent_path ())) {
     auto ss = std::stringstream {};
     ss << "Invalid pcd filepath (" << pcd_cloud_path.string () << ") specified.";
     auto ec = std::make_error_code (std::errc::no_such_file_or_directory);
@@ -128,6 +173,7 @@ auto saveCloud (pcl::PointCloud <PointType> const & cloud, fs::path const & pcd_
   }
 }
 
+
 /**
  * @throws boost::property_tree::ptree_bad_data exception when the value cannot be added.
  */
@@ -141,8 +187,6 @@ auto addValueToList (pt::ptree & tree, ValueType const & value) {
   }
   tree.push_back (std::make_pair ("", temp_node));
 }
-
-
 
 }
 }

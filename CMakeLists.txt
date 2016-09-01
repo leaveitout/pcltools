@@ -33,7 +33,7 @@ set(SOURCE_FILES
         include/pcltools/pipeline/cloud_producer.hpp
         include/pcltools/object_pose_storage.hpp
         include/pcltools/arm_pose_storage.hpp
-        src/pcltools/palette.cpp include/pcltools/palette.hpp)
+        src/pcltools/palette.cpp include/pcltools/palette.hpp include/pcltools/label_storage.hpp src/pcltools/label_storage.cpp)
 
 add_library(pcltools SHARED ${SOURCE_FILES})
 
