@@ -84,12 +84,12 @@ auto pcltools::fileio::LabelStorage::load (fs::path const & source_path) -> bool
 }
 
 
-auto pcltools::fileio::LabelStorage::getPcdDirectory () const -> fs::path const & {
+auto pcltools::fileio::LabelStorage::getPcdDirectory () const noexcept -> fs::path const & {
   return pcd_directory_;
 }
 
 
-auto pcltools::fileio::LabelStorage::setPcdDirectory (fs::path const & pcd_directory) -> void {
+auto pcltools::fileio::LabelStorage::setPcdDirectory (fs::path const & pcd_directory) noexcept -> void {
   pcd_directory_ = pcd_directory;
 }
 
@@ -100,7 +100,8 @@ auto pcltools::fileio::LabelStorage::addLabel (fs::path const & file_path, unsig
 
 
 auto
-pcltools::fileio::LabelStorage::getLabelAtIndex (unsigned index) -> std::tuple <fs::path, int> {
+pcltools::fileio::LabelStorage::getLabelAtIndex (unsigned index) const
+-> std::tuple <fs::path, int> {
   return labels_.at (index);
 }
 

@@ -35,11 +35,12 @@ class LabelStorage {
 
   auto load (fs::path const & source_path) -> bool;
 
-  auto getPcdDirectory () const -> fs::path const &;
+  auto getPcdDirectory () const noexcept -> fs::path const &;
 
-  auto setPcdDirectory (fs::path const & pcd_directory) -> void;
+  auto setPcdDirectory (fs::path const & pcd_directory) noexcept -> void;
 
   auto addLabel (fs::path const & file_path, unsigned label) -> void;
+
 
   /**
    * Get the label at the index.
@@ -48,8 +49,11 @@ class LabelStorage {
    * @return label at the index.
    * @throw std::out_of_range if index out of range.
    */
-  auto getLabelAtIndex (unsigned index)
-  -> std::tuple <fs::path, int>;
+  inline auto getLabelAtIndex (unsigned index) const
+  -> std::tuple <fs::path, int> {
+    return labels_.at (index);
+  }
+
 
   /**
    * Set the label at the index.
@@ -63,7 +67,6 @@ class LabelStorage {
   fs::path pcd_directory_;
   std::vector <std::tuple <fs::path, unsigned>> labels_;
 };
-
 
 }
 }
