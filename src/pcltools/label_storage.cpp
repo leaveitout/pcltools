@@ -99,11 +99,9 @@ auto pcltools::fileio::LabelStorage::addLabel (fs::path const & file_path, unsig
 }
 
 
-auto
-pcltools::fileio::LabelStorage::getLabelAtIndex (unsigned index) const
--> std::tuple <fs::path, int> {
-  return labels_.at (index);
-}
+//auto pcltools::fileio::LabelStorage::getLabelAtIndex (unsigned index) const -> std::tuple <fs::path, int> {
+//  return labels_.at (index);
+//}
 
 
 auto pcltools::fileio::LabelStorage::setLabelAtIndex (unsigned index, unsigned label) -> void {
