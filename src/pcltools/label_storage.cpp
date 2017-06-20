@@ -107,3 +107,9 @@ auto pcltools::fileio::LabelStorage::addLabel (fs::path const & file_path, unsig
 auto pcltools::fileio::LabelStorage::setLabelAtIndex (unsigned index, unsigned label) -> void {
   std::get <unsigned> (labels_.at (index)) = label;
 }
+
+
+auto pcltools::fileio::LabelStorage::removeLabel () -> void {
+  if (!labels_.empty ())
+    labels_.pop_back ();
+}

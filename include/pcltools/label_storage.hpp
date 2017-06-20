@@ -41,6 +41,7 @@ class LabelStorage {
 
   auto addLabel (fs::path const & file_path, unsigned label) -> void;
 
+  auto removeLabel () -> void;
 
   /**
    * Get the label at the index.
