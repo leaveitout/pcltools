@@ -29,7 +29,7 @@ class LabelStorage {
  public:
   LabelStorage ();
 
-  LabelStorage (fs::path const & pcd_directory);
+  LabelStorage (fs::path const & pcd_directory, size_t reserve_size=0ULL);
 
   auto save (fs::path const & destination_path) const -> bool;
 

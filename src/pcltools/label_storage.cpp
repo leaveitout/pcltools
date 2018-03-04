@@ -10,9 +10,11 @@ pcltools::fileio::LabelStorage::LabelStorage () {
 }
 
 
-pcltools::fileio::LabelStorage::LabelStorage (fs::path const & pcd_directory)
+pcltools::fileio::LabelStorage::LabelStorage (fs::path const & pcd_directory,
+                                              size_t reserve_size)
     : pcd_directory_ {pcd_directory} {
-
+      if (reserve_size > 0ULL)
+        labels_.reserve (reserve_size);
 }
 
 
