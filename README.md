@@ -16,15 +16,9 @@ After forking the repo, it can be added as a submodule to a project and compiled
 
 ## Example Use Case
 
-For a point cloud, if you wanted to detect a table, segment all points abo
+An example use case is if you wanted to detect a table, segment all points above the table and then use these points for clustering. Using the standard PCL approach would involve most parts of the pipeline using a single thread. This would be made more challenging if you wanted to do this for multiple cameras simultaneously. To speed up processing by taking advantage of all of the unused threads on a user's machine, the following pipeline could be constructed with this library. 
 
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
+![Example processing pipeline.](https://raw.githubusercontent.com/leaveitout/pcltools/master/res/pcl_software_pipeline_landscape.png)
 
 ## Citation
 
